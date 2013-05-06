@@ -1,0 +1,19 @@
+mysqlx
+
+This is the MySQL Wrapper module.
+It's purpose is to provide a clean namespace to hiera for mysql subclasses
+we create to support version-specific classes with their own values.
+
+License
+-------
+
+
+Contact
+-------
+Wolf Noble <wnoble@datapipe.com>
+Eric Sakowski <esakowski@datapipe.com>
+
+Support
+-------
+
+Please log tickets and issues at our [Projects site](http://projects.example.com)
