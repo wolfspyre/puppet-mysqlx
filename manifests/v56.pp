@@ -47,10 +47,10 @@ class mysqlx::v56(
   $port                  = undef,
   $purge_conf_dir        = undef,
   $python_package_name   = undef,
-  $repo_hash             = hiera('mysqlx::v56::repo_hash', mysql56 => {
+  $repo_hash             = {'mysql56' => {
     descr      => 'MySQL 5.6',
     mirrorlist => 'http://rhnproxy.smq.datapipe.net/vendor/mysql/$releasever/$basearch/5.6/mirrorlist',
-    gpgcheck   => '0' }),
+    gpgcheck   => '0' }},
   $restart               = undef,
   $root_group            = undef,
   $root_password         = undef,
@@ -121,13 +121,21 @@ class mysqlx::v56(
       }
       #we only add the yumrepo for rhel variants
       if $add_repo {
+        ##NOTE: This might work better
+        #include dpcore
+        #include dprepo
+        #Exec['yum_clean_metadata'] -> Class['mysql']
+        #Anchor['dprepo::end'] -> Class['mysql']
+        #if $server {
+        #  Exec['yum_clean_metadata'] -> Package['mysql-server']
+        #}
         exec { 'mysqlx_yum_clean_metadata':
           command     => '/usr/bin/yum clean metadata',
           refreshonly => true,
           before      => Class['mysql'],
         }#end metadata cleaning exec
         Yumrepo {
-          notify  => Exec['mysqlx_yum_clean_metadata'],
+          notify  => Exec['yum_clean_metadata'],
           before  => [Anchor['mysqlx::v56::end'],File[$datadir]],
         }
         create_resources('yumrepo', $repo_hash)

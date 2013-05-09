@@ -4,5 +4,7 @@ fixtures:
     core: 'gitolite@puppetdev.smq.datapipe.net:/core.git'
     app: 'gitolite@puppetdev.smq.datapipe.net:/app.git'
   symlinks:
+    dpcore: "#{source_dir}/spec/fixtures/modules/core/dpcore"
+    dprepo: "#{source_dir}/spec/fixtures/modules/core/dprepo"
     mysqlx: "#{source_dir}"
     mysql: "#{source_dir}/spec/fixtures/modules/app/mysql"
