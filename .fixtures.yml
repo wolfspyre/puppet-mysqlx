@@ -1,0 +1,8 @@
+fixtures:
+  repositories:
+    stdlib: 'git://github.com/puppetlabs/puppetlabs-stdlib.git'
+    core: 'gitolite@puppetdev.smq.datapipe.net:/core.git'
+    app: 'gitolite@puppetdev.smq.datapipe.net:/app.git'
+  symlinks:
+    mysqlx: "#{source_dir}"
+    mysql: "#{source_dir}/spec/fixtures/modules/app/mysql"

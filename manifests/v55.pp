@@ -48,10 +48,10 @@ class mysqlx::v55(
   $port                  = undef,
   $purge_conf_dir        = undef,
   $python_package_name   = undef,
-  $repo_hash             = hiera('mysqlx::55::repo_hash', mysql55 => {
+  $repo_hash             = {'mysql55' => {
     descr      => 'MySQL 5.5',
     mirrorlist => 'http://rhnproxy.smq.datapipe.net/vendor/mysql/$releasever/$basearch/5.5/mirrorlist',
-    gpgcheck   => '0' }),
+    gpgcheck   => '0' }},
   $restart               = undef,
   $root_group            = undef,
   $root_password         = undef,

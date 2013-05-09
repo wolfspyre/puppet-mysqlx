@@ -47,7 +47,7 @@ class mysqlx::v56(
   $port                  = undef,
   $purge_conf_dir        = undef,
   $python_package_name   = undef,
-  $repo_hash             = hiera('mysqlx::56::repo_hash', mysql56 => {
+  $repo_hash             = hiera('mysqlx::v56::repo_hash', mysql56 => {
     descr      => 'MySQL 5.6',
     mirrorlist => 'http://rhnproxy.smq.datapipe.net/vendor/mysql/$releasever/$basearch/5.6/mirrorlist',
     gpgcheck   => '0' }),
