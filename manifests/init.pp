@@ -19,5 +19,5 @@
 # Copyright 2013 Datapipe, unless otherwise noted.
 #
 class mysqlx {
-  notice "The mysqlx class should not be decalred directly. Please refer to the documentation."
+  notice 'The mysqlx class should not be decalred directly. Please refer to the documentation.'
 }
