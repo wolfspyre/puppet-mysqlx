@@ -68,4 +68,4 @@ describe 'mysqlx::minion', :type => :class do
       end
     end
   end
-  end
+end

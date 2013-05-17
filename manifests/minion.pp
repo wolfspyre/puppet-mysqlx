@@ -1,25 +1,32 @@
 # mysqlx::minion
 # helper class
 #  This is a helper class to take in hashes and feed them to our defined types
-#mysql::databases:
+#
+#mysqlx::databases:
 # dbtocreate: {
 #  ensure: 'present',
 #  user: 'somedbuser',
 #  password: 'monkey-fly-mosquito',
 #  host: 'localhost'
 # }
-#mysql::grants:
-#  foodbrwuser: {
+# somedatabase: {
+#  ensure: 'present',
+#  user: 'somedbuser',
+#  password: 'monkey-fly-mosquito',
+#  host: 'localhost'
+#}
+#mysqlx::grants:
+#  somedbrwuser: {
 #    ensure:   'present',
-#    user:     'foodbrwuser',
+#    user:     'somedbrwuser',
 #    database: 'somedatabase',
 #    grant:    'all',
 #    host:     '%'
 # }
-#mysql::users:
-#  foodbrwuser: {
+#mysqlx::users:
+#  somedbrwuser: {
 #    ensure:   'present',
-#    database: 'database',
+#    database: 'somedatabase',
 #    password: 'somepassword',
 #    host:     '%'
 # }
@@ -29,6 +36,7 @@ class mysqlx::minion(
   $grants    = false,
   $users     = false,
   ){
+  Database{} -> Database_user{} -> Database_grant{}
   if $databases {
     validate_hash($databases)
     #we have databases we should create

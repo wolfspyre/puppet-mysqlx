@@ -64,6 +64,14 @@ There is one helper class:
 Tested on rh5/6. Support for other OSes is limited/nonexistent at this time.
 MySQL 5.6 does not work yet.
 
+This seems like common sense, but:
+  * If you're adding a user hash:
+    - The *database* listed must exist in the catalog. This is because the only action being performed is an update to the 'mysql' database, not a database creation.
+
+  * If you're adding a grant hash:
+    - The *database* and *user*/*host* entity referenced must exist in the catalog.
+
+
 ##Development
 
 Guidelines and instructions for contributing to your module.
