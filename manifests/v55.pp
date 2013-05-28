@@ -50,7 +50,7 @@ class mysqlx::v55(
   $python_package_name   = undef,
   $repo_hash             = {'mysql55' => {
     descr      => 'MySQL 5.5',
-    mirrorlist => 'http://rhnproxy.smq.datapipe.net/vendor/mysql/$releasever/$basearch/5.5/mirrorlist',
+    mirrorlist => 'http://your.repo.server/vendor/mysql/$releasever/$basearch/5.5/mirrorlist',
     gpgcheck   => '0' }},
   $restart               = undef,
   $root_group            = undef,
