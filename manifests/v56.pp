@@ -49,7 +49,7 @@ class mysqlx::v56(
   $python_package_name   = undef,
   $repo_hash             = {'mysql56' => {
     descr      => 'MySQL 5.6',
-    mirrorlist => 'http://rhnproxy.smq.datapipe.net/vendor/mysql/$releasever/$basearch/5.6/mirrorlist',
+    mirrorlist => 'http://your.repo.server/vendor/mysql/$releasever/$basearch/5.6/mirrorlist',
     gpgcheck   => '0' }},
   $restart               = undef,
   $root_group            = undef,
