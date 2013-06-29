@@ -45,6 +45,12 @@ describe 'mysqlx::v56', :type => :class do
     let :params do
       default_params.merge({ :add_repo => false })
     end
+    ['enable_java', 'enable_php','enable_python','enable_ruby'].each do |enable_extra|
+      it "should report an error when #{enable_extra} is not a boolean" do
+        params.merge!({ enable_extra => 'BOGON'})
+        expect { subject }.to raise_error(Puppet::Error, /"BOGON" is not a boolean.  It looks to be a String/)
+      end
+    end
     ['mysql','mysql::params','mysqlx::v56'].each do |myclass|
       it { should contain_class(myclass) }
     end
@@ -67,6 +73,30 @@ describe 'mysqlx::v56', :type => :class do
         default_params.merge({ :server => true })
       end
       it {should contain_class('mysql::server')}
+    end
+    context 'when enable_java is true' do
+      let :params do
+        default_params.merge({ :enable_java => true})
+      end
+      it {should contain_class('mysql::java')}
+    end
+    context 'when enable_php is true' do
+      let :params do
+        default_params.merge({ :enable_php => true})
+      end
+      it {should contain_class('mysql::php')}
+    end
+    context 'when enable_python is true' do
+      let :params do
+        default_params.merge({ :enable_python => true})
+      end
+      it {should contain_class('mysql::python')}
+    end
+    context 'when enable_ruby is true' do
+      let :params do
+        default_params.merge({ :enable_ruby => true})
+      end
+      it {should contain_class('mysql::ruby')}
     end
   end
 end

@@ -6,6 +6,14 @@
 # [*add_repo*]  - Boolean which determines if this module is responbile for
 #   creating the yumrepo
 #
+# [*enable_java*] - Boolean which includes the java-mysql class when true
+#
+# [*enable_php*] - Boolean which includes the php-mysql class when true
+#
+# [*enable_python*] - Boolean which includes the python-mysql class when true
+#
+# [*enable_ruby*] - Boolean which includes the ruby-mysql class when true
+#
 # [*repo_hash*] - A hash to feed create_resources to realize the yum repository
 #
 # [*server*]    - a boolean to determine if we should include the server class
@@ -37,6 +45,10 @@ class mysqlx::v55(
   $datadir               = undef,
   $default_engine        = undef,
   $etc_root_password     = undef,
+  $enable_java           = false,
+  $enable_php            = false,
+  $enable_python         = false,
+  $enable_ruby           = false,
   $java_package_name     = undef,
   $log_error             = undef,
   $manage_service        = undef,
@@ -50,7 +62,7 @@ class mysqlx::v55(
   $python_package_name   = undef,
   $repo_hash             = {'mysql55' => {
     descr      => 'MySQL 5.5',
-    mirrorlist => 'http://your.repo.server/vendor/mysql/$releasever/$basearch/5.5/mirrorlist',
+    mirrorlist => 'http://rhnproxy.smq.datapipe.net/vendor/mysql/$releasever/$basearch/5.5/mirrorlist',
     gpgcheck   => '0' }},
   $restart               = undef,
   $root_group            = undef,
@@ -101,9 +113,25 @@ class mysqlx::v55(
     ssl_key               => $ssl_key,
   }
   create_resources('class', {'mysql' => $mysql_params})
+  validate_bool($enable_java)
+  validate_bool($enable_php)
+  validate_bool($enable_python)
+  validate_bool($enable_ruby)
   include mysql::params
   if $server {
     include mysql::server
+  }
+  if $enable_java {
+    include mysql::java
+  }
+  if $enable_php {
+    include mysql::php
+  }
+  if $enable_python {
+    include mysql::python
+  }
+  if $enable_ruby {
+    include mysql::ruby
   }
   #take advantage of the Anchor pattern
   anchor{'mysqlx::v55::begin':

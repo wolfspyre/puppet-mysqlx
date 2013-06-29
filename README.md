@@ -40,7 +40,7 @@ If your most recent release breaks compatibility or requires particular steps fo
 
 ##Usage
 
-Classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module.
+the parameters enable_java, enable_php, enable_python, and enable_ruby facilitate the automatic inclusion of the language-mysql classes, and subsequently that package
 
 ##Reference
 

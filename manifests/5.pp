@@ -4,24 +4,11 @@
 #
 # === Parameters
 #
-#
-# [*enable_java*] - Boolean which includes the java-mysql class when true
-#
-# [*enable_php*] - Boolean which includes the php-mysql class when true
-#
-# [*enable_python*] - Boolean which includes the python-mysql class when true
-#
-# [*enable_ruby*] - Boolean which includes the ruby-mysql class when true
-#
-# [*server*] - a boolean to determine if we should include the server class
-#
 # === Variables
 #
 # === Examples
 #
-#  This class is a namespace provider wrapper which also realizes the yumrepo
-#  for the version in question, and purges 'mysql' packages as they're now a
-#  dependency for common packages in rh variants, and may already be installed
+# This class shouldn't ever be invoked directly. It simply is a namespace
 #
 # === Authors
 #
@@ -31,7 +18,7 @@
 #
 # Copyright 2013 Datapipe, unless otherwise noted.
 #
-class mysqlx::v5(
+class mysqlx::5(
   $basedir               = undef,
   $bind_address          = undef,
   $client_package_name   = undef,
@@ -40,10 +27,6 @@ class mysqlx::v5(
   $datadir               = undef,
   $default_engine        = undef,
   $etc_root_password     = undef,
-  $enable_java           = false,
-  $enable_php            = false,
-  $enable_python         = false,
-  $enable_ruby           = false,
   $java_package_name     = undef,
   $log_error             = undef,
   $manage_service        = undef,
@@ -59,7 +42,6 @@ class mysqlx::v5(
   $root_password         = undef,
   $ruby_package_name     = undef,
   $ruby_package_provider = undef,
-  $server                = false,
   $server_package_name   = undef,
   $service_name          = undef,
   $socket                = undef,
@@ -100,25 +82,5 @@ class mysqlx::v5(
     ssl_cert              => $ssl_cert,
     ssl_key               => $ssl_key,
   }
-  validate_bool($enable_java)
-  validate_bool($enable_php)
-  validate_bool($enable_python)
-  validate_bool($enable_ruby)
   create_resources('class', {'mysql' => $mysql_params})
-  include mysql::params
-  if $server {
-    include mysql::server
-  }
-  if $enable_java {
-    include mysql::java
-  }
-  if $enable_php {
-    include mysql::php
-  }
-  if $enable_python {
-    include mysql::python
-  }
-  if $enable_ruby {
-    include mysql::ruby
-  }
 }

@@ -36,7 +36,8 @@ class mysqlx::minion(
   $grants    = false,
   $users     = false,
   ){
-  Database{} -> Database_user{} -> Database_grant{}
+  #make sure mysql
+  Package['mysql-server'] -> Database{} -> Database_user{} -> Database_grant{}
   if $databases {
     validate_hash($databases)
     #we have databases we should create
